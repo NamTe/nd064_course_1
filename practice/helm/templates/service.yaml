@@ -5,7 +5,7 @@ metadata:
     app: {{ .Values.image.name}}
     tag: {{ .Values.image.tag}}
   name: {{ .Values.image.name}}-{{ .Values.image.tag}}
-  namespace: demo
+  namespace: {{ .Values.namespace.name}}
 spec:
   ports:
   - port: {{ .Values.service.port}}
