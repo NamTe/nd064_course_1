@@ -1,3 +1,8 @@
 apiVersion: v1
 name: namte-helm-chart-for-nginx
 version: v1.0.0
+keywords:
+  - "namte"
+  - "nginx"
+maintainers:
+  - name: "namte"
