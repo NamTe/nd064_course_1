@@ -1,0 +1,20 @@
+namespace:
+  name: namte
+replicaCount: 3
+
+image:
+  name: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+
+configmap:
+  data: "version: latest"
+
+service:
+  port: 6111
+  type: "ClusterIP"
