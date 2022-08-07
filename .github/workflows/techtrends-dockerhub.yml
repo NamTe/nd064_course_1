@@ -25,4 +25,4 @@ jobs:
         file: project/Dockerfile
         platforms: linux/amd64
         push: true
-        tags: techtrends:latest
+        tags: namtea3/techtrends:latest
