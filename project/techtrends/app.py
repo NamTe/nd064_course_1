@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 import logging
+import sys
 
 # Global variable
 dbConnectionCount = 0
@@ -88,7 +89,7 @@ def healthz():
 @app.route('/metrics')
 def metrics():
     connection = get_db_connection()
-    postCount = len(connection.execute('SELECT count(*) FROM posts').fetchall())
+    postCount = connection.execute('SELECT count(*) FROM posts').fetchone()[0]
     connection.close()
     response = app.response_class(
         response=json.dumps({"db_connection_count": dbConnectionCount, "post_count": postCount}),
@@ -100,7 +101,11 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
+   stdout_handler = logging.StreamHandler(sys.stdout)
+   stderr_handler = logging.StreamHandler(sys.stderr)
+   handlers = [stderr_handler, stdout_handler]
    logging.basicConfig(
        level=logging.DEBUG,
+       handlers=handlers,
        format='%(levelname)s:%(name)s: %(asctime)s, %(message)s')
    app.run(host='0.0.0.0', port='3111')
